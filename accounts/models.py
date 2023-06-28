@@ -1,3 +1,6 @@
+from django.utils.html import mark_safe
+from django.db import models
+from django.contrib.auth.models import User
 from typing import Any
 from django.db import models
 
@@ -6,7 +9,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, username, email, password=None):
+    def create_user(self, first_name, last_name, username,phone_number, email, password=None):
         if not email:
             return ValueError('User must have an email address')
         if not username:
@@ -18,6 +21,8 @@ class MyAccountManager(BaseUserManager):
             username = username,
             first_name = first_name,
             last_name = last_name,
+            phone_number=phone_number,
+            
 
 
         )
@@ -47,7 +52,6 @@ class account(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=50, unique=True)
     phone_number = models.CharField(max_length=50)
-
     Date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True )
     is_admin = models.BooleanField(default=False)
@@ -68,3 +72,23 @@ class account(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
+
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(account, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+
+    class Meta:
+       verbose_name = 'UserProfile'
+       verbose_name_plural = 'UserProfiles'
+
+    def image_tag(self):
+     if self.profile_picture and hasattr(self.profile_picture, 'url'):
+        return mark_safe('<img src="%s" width="50" height="30" />' % (self.profile_picture.url))
+     else:
+         return "No Image Found"
+
+
+    def __str__(self):
+        return self.user.username

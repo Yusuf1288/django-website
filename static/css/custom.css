@@ -1,0 +1,63 @@
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+}
+
+.rating > label {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > label:before,
+.rating > label:after {
+    content: "\2605";
+    position: absolute;
+}
+
+.rating > label:before {
+    color: #888;
+}
+
+.rating > label:after {
+    color: #ffd700;
+}
+
+.rating > input {
+    display: none;
+}
+
+.rating > input:checked ~ label:after,
+.rating > input:checked ~ label:before,
+.rating > label:hover ~ input:not(:checked) ~ label:before {
+    opacity: 1;
+}
+
+.rating > label:hover ~ input:not(:checked) ~ label:after {
+    opacity: 0;
+}

@@ -1,9 +1,9 @@
-from .models import *
 
+
+from .models import Category
 
 def menu_links(request):
     links = Category.objects.all()
-    return dict(request, links=links)
-
+    return {'links': links}
 
 

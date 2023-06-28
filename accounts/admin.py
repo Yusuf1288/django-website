@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import account
+from .models import account,UserProfile
 
 # Register your models here.
 
@@ -16,3 +16,8 @@ class  accountAdmin(UserAdmin):
     fieldsets = ()
 
 admin.site.register(account, accountAdmin)
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user','image_tag')
+
+admin.site.register(UserProfile, UserProfileAdmin )

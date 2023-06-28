@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <section class="section-conten padding-y bg">
+          {% include 'alerts.html' %}
+          <div class="container">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+              <h1 class="h3 mb-0 text-gray-800">Edit Profile</h1>
+            </div>    
+            
+              <div class="row">
+                  {% include 'accounts/dashboardoptions.html' %}
+              <main class="col-md-9">
+                  <article class="card">
+                      <div class="card-body p-0">
+                        <div class="row">
+                          <div class="col-lg-3"></div>
+                          <div class="col-lg-6">
+                            <div class="p-5">
+                              <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Update Your Profile!</h1>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ user_form.as_p }}
+                                {{ profile_form.as_p }}
+                                <input type="submit" class="btn btn-primary" value="Save">
+                            </form>
+                              <hr>
+                              <div class="text-center">
+                                <a class="small" href="">Back</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </article>
+          </main>
+        </section>
+    </div>
+{% endblock content %}
